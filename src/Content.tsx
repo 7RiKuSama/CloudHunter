@@ -3,6 +3,7 @@ interface DarkModeProps {
     darkMode: {
         bg: string;
         color: string;
+        isEnabled: boolean
     }
 }
 
@@ -10,7 +11,10 @@ interface DarkModeProps {
 const Content = ({ darkMode}: DarkModeProps) => {
     return <>
         
-        <Box bg={darkMode.bg} h="100%" w="100%" p={4}>
+        <Box h="100%" w="100%" p={4} style={{
+            color: darkMode.color,
+            backgroundColor: darkMode.bg
+        }}>
             <Box style={{border: "1px solid black"}}>hello world</Box>
         </Box>
        

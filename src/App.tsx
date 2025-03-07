@@ -20,7 +20,7 @@ function App() {
 
   const [drawerOpen, setDrawerOpen] = useState(false)
   const {logoColor, handleMouseEnter, handleMouseLeave, useLogoColor} = setLogoColor("#4d98fa")
-  const [darkMode, setDarkMode] = useState({bg: "white", color: "black"})
+  const [darkMode, setDarkMode] = useState({bg: "white", color: "rgb(29, 30, 38)", isEnabled: false})
   return (
     <>
       <Provider>
@@ -38,7 +38,9 @@ function App() {
               logoColor={logoColor} 
               useLogoColor={useLogoColor} 
               handleMouseEnter={handleMouseEnter} 
-              handleMouseLeave={handleMouseLeave} 
+              handleMouseLeave={handleMouseLeave}
+              darkMode={darkMode}
+              setDarkMode={setDarkMode}      
             />
           </GridItem>
           <GridItem rowSpan={1} colSpan={1}>
