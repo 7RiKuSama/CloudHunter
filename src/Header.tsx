@@ -24,7 +24,7 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
 
-    const [isConnected, useIsConnected] = useState(false)
+    const [isConnected, useIsConnected] = useState(true)
     return <>
         <Provider>
             <Box bg="rgb(29, 30, 38)" h="100%" color="white">
@@ -35,7 +35,7 @@ const Header = (props: HeaderProps) => {
                     h={"100%"}
                 >
                     <IconButton id="navbar-btn" bg={"none"} ml={2} onClick={() => props.setDrawerOpen(!props.drawerOpen)}>
-                        <FaBars />
+                        <FaBars color="white" />
                     </IconButton>
                     <HStack>
                         <Link onMouseEnter={props.handleMouseEnter} onMouseLeave={props.handleMouseLeave}>

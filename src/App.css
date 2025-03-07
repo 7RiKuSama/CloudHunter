@@ -1,7 +1,7 @@
 :root {
     --main-color: white;
-    --links-color: #4dfa7b;
-    --links-hover: #4dfa7b3a;
+    --links-color: #4d98fa;
+    --links-hover: #4d98fa3a;
     --background-color: rgb(29, 30, 38);
     --menus-color: rgb(16, 16, 20);
     --red-color: rgb(255, 106, 106);
@@ -67,8 +67,7 @@ body {
     display: none;
 }
 
-
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 550px) {
     .nav-container {
         display: none;
     }
