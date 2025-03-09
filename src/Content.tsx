@@ -1,21 +1,37 @@
 import { Box } from "@chakra-ui/react"
+import Container from "./utilityComponants/Container"
+import Home from "./pages/home/Home"
+
 interface DarkModeProps {
     darkMode: {
         bg: string;
         color: string;
+        boxColor: string;
+        boxBg: string;
         isEnabled: boolean
     }
 }
 
 
-const Content = ({ darkMode}: DarkModeProps) => {
+const Content = ({ darkMode }: DarkModeProps) => {
     return <>
         
-        <Box h="100%" w="100%" p={4} style={{
+        <Box h="100%" w="90vw" paddingInline={15} paddingBlock={10} style={{
             color: darkMode.color,
-            backgroundColor: darkMode.bg
+            backgroundColor: darkMode.bg,
+            display: "flex",
+            justifyContent: "center",
+            textAlign: "justify",
         }}>
-            <Box style={{border: "1px solid black"}}>hello world</Box>
+            <Box 
+                h={"100%"} 
+                w={"100%"}
+            >
+                <Container>
+                    <Home height="400px"></Home>
+                </Container>
+            </Box>
+
         </Box>
        
     </>

@@ -1,10 +1,12 @@
-import { Provider } from "./components/ui/provider"
+import { Box } from '@chakra-ui/react'
 
 const Footer = () => {
     return <>
-        <Provider>
-            
-        </Provider>
+        <Box h={"100%"}
+        w={"100%"}
+        bg={"yellow"}>
+
+        </Box>
     </>
 }
 
