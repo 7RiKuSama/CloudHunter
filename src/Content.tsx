@@ -28,10 +28,9 @@ const Content = ({ darkMode }: DarkModeProps) => {
                 w={"100%"}
             >
                 <Container>
-                    <Home height="400px"></Home>
+                    <Home height="450px"></Home>
                 </Container>
             </Box>
-
         </Box>
        
     </>
