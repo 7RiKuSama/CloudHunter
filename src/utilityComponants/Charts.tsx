@@ -137,6 +137,7 @@ const Charts = () => {
                             <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="url(#colorUv)" fillOpacity={1} />
                         </AreaChart>
                 </ResponsiveContainer>
+                <iframe width="95%" height="100%" style={{marginLeft: "30px", borderRadius: "5px"}} src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=wind&product=ecmwf&level=surface&lat=35.717&lon=-0.549&message=true"></iframe>
             </Flex>
         </>
     )

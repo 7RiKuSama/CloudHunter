@@ -1,5 +1,6 @@
 import { Stat, Grid, GridItem, Flex, Image, VStack, Text } from "@chakra-ui/react"
 import Charts from "../../utilityComponants/Charts"
+import useFetchLocation from "../../hooks/getLocation"
 
 
 const Home = ({ height }: { height: string }) => {
@@ -83,7 +84,7 @@ const Home = ({ height }: { height: string }) => {
                         </Stat.Root>
                     </GridItem>
                 </Grid>
-                <Charts />
+                <Charts></Charts>
                 </Flex>
         </>
     )
