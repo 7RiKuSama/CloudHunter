@@ -1,30 +1,30 @@
 import { Provider } from "./components/ui/provider"
-import useLocation from "./hooks/getLocation"
 import { 
   Grid, 
   GridItem,
   Flex 
 } from "@chakra-ui/react"
 
-import { useState } from "react"
+import { useState, createContext } from "react"
 import Header from './Header'
 import Content from './Content'
 import "./App.css"
 import Drawer from "./utilityComponants/Drawer"
 import setLogoColor from "./hooks/setLogoColor"
+import fetchWeather from "./api/GetCurrentWeater"
+import WeatherContext from "./Contexts/WeatherContext"
 
 
 
 function App() {
  
-  const { location } = useLocation()
   const [drawerOpen, setDrawerOpen] = useState(false)
   const {logoColor, handleMouseEnter, handleMouseLeave, useLogoColor} = setLogoColor("#4d98fa")
   const [darkMode, setDarkMode] = useState({bg: "white", color: "rgb(29, 30, 38)", isEnabled: false, boxColor: "white", boxBg: "rgb(29, 30, 38)"})
-  
-  
+  const {weather, isLoading} = fetchWeather()
+
   return (
-    <>
+    <WeatherContext.Provider value={{weather, isLoading, location}}>
       <div style={{ background: darkMode.bg }}>
         <Provider>
           <Drawer handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} logoColor={logoColor} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
@@ -57,9 +57,10 @@ function App() {
               </Flex>
             </GridItem>
           </Grid>
+          <p>weather {JSON.stringify(weather)}</p>
         </Provider>
       </div>
-    </>
+    </WeatherContext.Provider>
   )
 }
 

@@ -68,7 +68,33 @@ const Charts = () => {
 
                 display={{base: "none", md: "flex"}}
             >
-            <Tabs.Root
+                <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart
+                        width={500}
+                        height={300}
+                        data={data}
+                        margin={{
+                            top: 40,
+                            right: 5,
+                            left: 0,
+                            bottom: 20,
+                        }}
+                        >
+                            <defs>
+                                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#8884d8" stopOpacity={1}/>
+                                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                                </linearGradient>
+                            </defs>
+                            
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Tooltip />
+                            <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="url(#colorUv)" fillOpacity={1} />
+                        </AreaChart>
+                </ResponsiveContainer>
+                <Tabs.Root
                 variant="enclosed"
                 w="400px"
                 ml={55}
@@ -111,33 +137,6 @@ const Charts = () => {
                     </Tabs.Trigger>
                 </Tabs.List>
                 </Tabs.Root>
-                <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart
-                        width={500}
-                        height={300}
-                        data={data}
-                        margin={{
-                            top: 40,
-                            right: 5,
-                            left: 0,
-                            bottom: 20,
-                        }}
-                        >
-                            <defs>
-                                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#8884d8" stopOpacity={1}/>
-                                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-                                </linearGradient>
-                            </defs>
-                            
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="url(#colorUv)" fillOpacity={1} />
-                        </AreaChart>
-                </ResponsiveContainer>
-                <iframe width="95%" height="100%" style={{marginLeft: "30px", borderRadius: "5px"}} src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=wind&product=ecmwf&level=surface&lat=35.717&lon=-0.549&message=true"></iframe>
             </Flex>
         </>
     )

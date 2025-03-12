@@ -14,6 +14,8 @@ interface DarkModeProps {
 
 
 const Content = ({ darkMode }: DarkModeProps) => {
+    
+    
     return <>
         
         <Box h="100%" w="90vw" paddingInline={15} paddingBlock={10} style={{
@@ -28,7 +30,7 @@ const Content = ({ darkMode }: DarkModeProps) => {
                 w={"100%"}
             >
                 <Container>
-                    <Home height="650px"></Home>
+                    <Home height="750px"></Home>
                 </Container>
             </Box>
         </Box>

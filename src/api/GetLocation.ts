@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const getLocation = (): Promise<{ longitude: number; latitude: number }> => {
   const options: PositionOptions = {
-    timeout: 25000,
+    timeout: 70000,
     maximumAge: 30000,
     enableHighAccuracy: true,
   };
