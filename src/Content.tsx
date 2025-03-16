@@ -1,5 +1,6 @@
-import { Box } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
 import Container from "./utilityComponants/Container"
+import ForcastCards from "./utilityComponants/ForcastCards"
 import Home from "./pages/home/Home"
 
 interface DarkModeProps {
@@ -18,22 +19,26 @@ const Content = ({ darkMode }: DarkModeProps) => {
     
     return <>
         
-        <Box h="100%" w="90vw" paddingInline={15} paddingBlock={10} style={{
+        <Flex h="100%" w="90vw" paddingInline={15} paddingBlock={10} style={{
             color: darkMode.color,
             backgroundColor: darkMode.bg,
-            display: "flex",
             justifyContent: "center",
             textAlign: "justify",
         }}>
-            <Box 
+            <Flex 
                 h={"100%"} 
                 w={"100%"}
+                flexDirection={"column"}
+                gap={2}
             >
                 <Container>
-                    <Home height="750px"></Home>
+                    <Home height="850px"></Home>
                 </Container>
-            </Box>
-        </Box>
+                <Container>
+                    <ForcastCards/>
+                </Container>
+            </Flex>
+        </Flex>
     </>
 }
 

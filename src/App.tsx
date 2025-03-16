@@ -5,7 +5,7 @@ import {
   Flex 
 } from "@chakra-ui/react"
 
-import { useState, createContext } from "react"
+import { useState } from "react"
 import Header from './Header'
 import Content from './Content'
 import "./App.css"
@@ -54,10 +54,10 @@ function App() {
                 <Content 
                   darkMode={darkMode}
                 />
+                
               </Flex>
             </GridItem>
           </Grid>
-          <p>weather {JSON.stringify(weather)}</p>
         </Provider>
       </div>
     </WeatherContext.Provider>
