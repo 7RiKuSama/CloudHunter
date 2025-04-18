@@ -1,5 +1,5 @@
 import { Flex, Text, HStack, DataList, Image } from "@chakra-ui/react"
-import WeatherStatCard from "./WeatherStatCard"
+import WeatherStatCard from "../common/weatherCards/WeatherStatCard";
 import { FaWeightHanging } from "react-icons/fa6";
 
 const ForcastCard = () => {

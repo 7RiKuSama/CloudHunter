@@ -1,15 +1,18 @@
 import { Box } from '@chakra-ui/react'
+import { ContainerProps } from "../../types/componants"
+import MainContext from '../../Contexts/MainContext'
+import { useContext } from 'react'
 
-interface ContainerProps {
-    children: React.ReactNode
-}
+
 
 const Container: React.FC<ContainerProps> = ({children}) => {
+    const {theme} = useContext(MainContext)
+    
     return (
         <>
             <Box w="100%" style={{
-                backgroundColor: "rgba(54, 56, 71, 0.24)",
-                border: "1px solid rgba(248, 249, 255, 0.18)",
+                backgroundColor: theme.boxBg,
+                border: `1px solid ${theme.borderColor}`,
                 borderRadius: "5px"
             }}>
                 {children}

@@ -1,15 +1,15 @@
 import { Grid, GridItem, Flex, VStack, Text, Box } from "@chakra-ui/react"
 
 import { useContext } from "react"
-import WeatherContext from "../../Contexts/WeatherContext"
-import WeatherStatCard from "../../utilityComponants/WeatherStatCard"
+import MainContext from "../../Contexts/MainContext"
+import WeatherStatCard from "../common/weatherCards/WeatherStatCard"
 import { FaTemperatureEmpty } from "react-icons/fa6";
 import { FaWind } from "react-icons/fa"
 import { IoMdWater } from "react-icons/io";
 import { TbFileDescription } from "react-icons/tb";
 import { IoIosRainy } from "react-icons/io";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import getCountryFlag from "../../api/GetCountryFlag"
+import getCountryFlag from "../../services/GetCountryFlag"
 import { GiRadiations } from "react-icons/gi";
 import { FaWeightHanging } from "react-icons/fa6";
 
@@ -17,9 +17,10 @@ import { FaWeightHanging } from "react-icons/fa6";
 
 
 
+
 const Home = ({ height }: { height: string }) => {
 
-    const { weather, isLoading } = useContext(WeatherContext)
+    const { weather, isLoading, theme, searchText } = useContext(MainContext)
     const {flag, isFlagLoading} = getCountryFlag(isLoading? weather.location.country : "")
     
     return (
@@ -32,6 +33,7 @@ const Home = ({ height }: { height: string }) => {
                 gap={2}
                 className="weather-card"
                 >
+                <p>{searchText}</p>
                 <Grid
                     w={{base: "100%", lg: "25%"}}
                     templateColumns={{base: "repeat(2, 1fr)", md: "repeat(6, 1fr)", lg: "repeat(2, 1fr)"}}
@@ -48,42 +50,42 @@ const Home = ({ height }: { height: string }) => {
                     </GridItem>
                     <GridItem colSpan={{md: 2, lg: 1}}>
                         <WeatherStatCard value={isLoading && weather.current.condition.text} label={"Condition"} unit={null} forcast={false}>
-                            <TbFileDescription />
+                            <TbFileDescription color={theme.secondColor}/>
                         </WeatherStatCard>
                     </GridItem>
                     <GridItem colSpan={{md: 2, lg: 1}}>
                         <WeatherStatCard value={isLoading && weather.current.temp_c} label={"Temperature"} unit={"C"} forcast={false}>
-                            <FaTemperatureEmpty/>
+                            <FaTemperatureEmpty color={theme.secondColor}/>
                         </WeatherStatCard>
                     </GridItem>
                     <GridItem>
                         <WeatherStatCard value={isLoading && weather.current.temp_c} label={"Humidity"} unit={"%"} forcast={false}>
-                            <IoMdWater />
+                            <IoMdWater color={theme.secondColor} />
                         </WeatherStatCard>
                     </GridItem>
                     <GridItem>
                         <WeatherStatCard value={isLoading && weather.current.wind_kph} label={"Wind"} unit={`kph (${isLoading && weather.current.wind_dir})`} forcast={false}>
-                            <FaWind />
+                            <FaWind color={theme.secondColor} />
                         </WeatherStatCard>
                     </GridItem>
                     <GridItem colSpan={{md: 2, lg: 1}}>
                         <WeatherStatCard value={isLoading && weather.current.precip_mm} label={"Precipitation"} unit={"mm"} forcast={false}>
-                            <IoIosRainy />
+                            <IoIosRainy color={theme.secondColor} />
                         </WeatherStatCard>
                     </GridItem>
                     <GridItem>
                         <WeatherStatCard value={isLoading && weather.current.vis_km} label={"Visibility"} unit={"km"} forcast={false}>
-                            <AiOutlineEyeInvisible />
+                            <AiOutlineEyeInvisible color={theme.secondColor} />
                         </WeatherStatCard>
                     </GridItem>
                     <GridItem colSpan={{md: 2, lg: 1}}>
                         <WeatherStatCard value={isLoading && weather.current.uv} label={"UV Index"} unit={""} forcast={false}>
-                            <GiRadiations />
+                            <GiRadiations color={theme.secondColor} />
                         </WeatherStatCard>
                     </GridItem>
                     <GridItem>
                         <WeatherStatCard value={isLoading && weather.current.pressure_mb} label={"Pressure"} unit={"mb"} forcast={false}>
-                            <FaWeightHanging />
+                            <FaWeightHanging color={theme.secondColor} />
                         </WeatherStatCard>
                     </GridItem>
                 </Grid>

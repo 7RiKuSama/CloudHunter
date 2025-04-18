@@ -1,4 +1,4 @@
-import { Stat, StatLabel, StatNumber, StatHelpText, Icon, HStack, Box } from "@chakra-ui/react";
+import { StatLabel, Text, StatHelpText, Icon, HStack, Box } from "@chakra-ui/react";
 import React from "react";
 
 interface ForcastCardProps {
@@ -17,10 +17,10 @@ const ForcastCard: React.FC<ForcastCardProps> = ({ label, value, unit, children 
                     {children}
                 </Icon>
             </HStack>
-            <StatNumber fontSize={{ base: "14px", sm: "25px" }}>
+            <Text fontSize={{ base: "14px", sm: "25px" }} fontWeight="bold">
                 {value}
                 <StatHelpText>{unit}</StatHelpText>
-            </StatNumber>
+            </Text>
         </Box>
     );
 };

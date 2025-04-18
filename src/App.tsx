@@ -6,13 +6,14 @@ import {
 } from "@chakra-ui/react"
 
 import { useState } from "react"
-import Header from './Header'
-import Content from './Content'
-import "./App.css"
-import Drawer from "./utilityComponants/Drawer"
+import Header from "./components/layouts/Header"
+import MainContent from './components/layouts/MainContent'
+import "./styles/App.css"
+import Drawer from "./components/common/Drawer"
 import setLogoColor from "./hooks/setLogoColor"
-import fetchWeather from "./api/GetCurrentWeater"
-import WeatherContext from "./Contexts/WeatherContext"
+import fetchWeather from "./services/GetCurrentWeater"
+import MainContext from "./Contexts/MainContext"
+import { lightTheme } from "./theme/themeInstance"
 
 
 
@@ -20,12 +21,13 @@ function App() {
  
   const [drawerOpen, setDrawerOpen] = useState(false)
   const {logoColor, handleMouseEnter, handleMouseLeave, useLogoColor} = setLogoColor("#4d98fa")
-  const [darkMode, setDarkMode] = useState({bg: "white", color: "rgb(29, 30, 38)", isEnabled: false, boxColor: "white", boxBg: "rgb(29, 30, 38)"})
+  const [theme, setTheme] = useState(lightTheme)
   const {weather, isLoading} = fetchWeather()
+  const [searchText, setSearchText] = useState("")
 
   return (
-    <WeatherContext.Provider value={{weather, isLoading, location}}>
-      <div style={{ background: darkMode.bg }}>
+    <MainContext.Provider value={{weather, isLoading, location, theme, searchText, setSearchText}}>
+      <div style={{ background: theme.bg }}>
         <Provider>
           <Drawer handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} logoColor={logoColor} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
           <Grid
@@ -42,8 +44,8 @@ function App() {
                 useLogoColor={useLogoColor} 
                 handleMouseEnter={handleMouseEnter} 
                 handleMouseLeave={handleMouseLeave}
-                darkMode={darkMode}
-                setDarkMode={setDarkMode}      
+                theme={theme}
+                setTheme={setTheme}      
               />
             </GridItem>
             <GridItem 
@@ -51,16 +53,15 @@ function App() {
               colSpan={1}
             >
               <Flex direction={"column"} justifyContent={"center"} alignItems={"center"}>
-                <Content 
-                  darkMode={darkMode}
+                <MainContent 
+                  theme={theme}
                 />
-                
               </Flex>
             </GridItem>
           </Grid>
         </Provider>
       </div>
-    </WeatherContext.Provider>
+    </MainContext.Provider>
   )
 }
 

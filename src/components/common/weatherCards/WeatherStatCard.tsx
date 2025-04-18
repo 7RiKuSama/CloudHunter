@@ -1,5 +1,7 @@
 import { Stat, Icon, HStack, Box, Text } from "@chakra-ui/react";
 import React from "react";
+import  MainContext from "../../../Contexts/MainContext"
+import { useContext } from "react"; 
 
 interface WeatherStatCardProps {
     label: string|null
@@ -11,12 +13,13 @@ interface WeatherStatCardProps {
 
 
 const WeatherStatCard: React.FC<WeatherStatCardProps> = ({ label, value, unit, forcast, children }: WeatherStatCardProps) => {
+    const {theme} = useContext(MainContext)
     return (
     <>
-        <Stat.Root h={"100%"} borderWidth="1px" borderColor="gray" borderRadius="5px" p={2} width={"100%"} display="flex" gap={forcast ? 5 : undefined}>
+        <Stat.Root h={"100%"} borderWidth="1px" borderColor="gray" borderRadius="5px" p={2} width={"100%"} display="flex" gap={forcast ? 5 : undefined} border={`1px solid ${theme.borderColor}`}>
             {!forcast && 
                 <HStack style={{display: "flex", justifyContent: "space-between", alignItems: "space-betweeen"}}>
-                    <Stat.Label>{label}</Stat.Label>
+                    <Stat.Label color={theme.secondColor}>{label}</Stat.Label>
                     <Icon color="fg.muted" style={{fontSize:"15px"}}>
                         {children}
                     </Icon>

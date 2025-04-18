@@ -12,7 +12,7 @@ const fetchWeather = () => {
             fetch(url)
             .then((response) => {
                 if (!response.ok) {
-                throw new Error("Couldn't fetch weather");
+                    throw new Error("Couldn't fetch weather");
                 }
                 return response.json();
             })

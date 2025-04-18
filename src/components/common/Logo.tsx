@@ -1,9 +1,5 @@
+import { LogoProps } from "../../types/componants"
 
-interface LogoProps {
-    color: string;
-    lWidth: string;
-    lHeight: string
-}
 
 const Logo = ({ color, lWidth, lHeight }: LogoProps) => {
     return <>

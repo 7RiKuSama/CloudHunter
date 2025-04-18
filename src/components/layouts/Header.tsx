@@ -1,4 +1,4 @@
-import { Provider } from "./components/ui/provider"
+import { Provider } from '../ui/provider';
 import { 
     IconButton, 
     Box, 
@@ -11,23 +11,14 @@ import { FaBars } from 'react-icons/fa';
 import { MdDarkMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { useState } from "react";
-import Logo from "./Logo"
-import "./App.css"
-
-interface HeaderProps {
-    setDrawerOpen: (open: boolean) => void;
-    drawerOpen: boolean;
-    logoColor: string;
-    useLogoColor: (color: string) => void;
-    handleMouseEnter: () => void;
-    handleMouseLeave: () => void;
-    setDarkMode: (mode: {bg: string, color: string, isEnabled: boolean, boxColor: string, boxBg: string}) => void;
-    darkMode: {isEnabled: boolean, bg: string, color: string, boxColor: string, boxBg: string};
-}
+import Logo from "../common/Logo";
+import "../../styles/App.css"
+import { HeaderProps } from "../../types/header"
+import { lightTheme, darkTheme } from '../../theme/themeInstance';
 
 const Header = (props: HeaderProps) => {
 
-    const [isConnected, useIsConnected] = useState(true)
+    const [isConnected] = useState(true)
     return <>
         <Provider>
             <header>
@@ -65,16 +56,18 @@ const Header = (props: HeaderProps) => {
                         <IconButton
                             variant="plain"
                             onClick={() =>
-                                props.setDarkMode({
-                                bg: props.darkMode.isEnabled ? "white" : "rgb(29, 30, 38)",
-                                color: props.darkMode.isEnabled ? "black" : "white",
-                                boxColor: "white",
-                                boxBg: props.darkMode.isEnabled ? "rgb(29, 30, 38)" : "rgb(39, 40, 51)",
-                                isEnabled: !props.darkMode.isEnabled,
+                                props.setTheme({
+                                bg: props.theme.isEnabled ? lightTheme.bg: darkTheme.bg,
+                                color: props.theme.isEnabled ? lightTheme.color : darkTheme.color,
+                                boxColor: props.theme ? lightTheme.boxColor: darkTheme.borderColor,
+                                boxBg: props.theme.isEnabled ? lightTheme.boxBg : "rgba(0, 0, 0, 0.2)",
+                                borderColor: props.theme.isEnabled ? lightTheme.borderColor : darkTheme.borderColor,
+                                secondColor: props.theme.isEnabled ? lightTheme.secondColor : darkTheme.secondColor,
+                                isEnabled: !props.theme.isEnabled,
                                 })
                             }
                             >
-                            {props.darkMode.isEnabled ? <MdDarkMode color="#4d98fa"/> : <MdOutlineDarkMode color="#4d98fa"/>}
+                            {props.theme.isEnabled ? <MdDarkMode color="#4d98fa"/> : <MdOutlineDarkMode color="#4d98fa"/>}
                             </IconButton>
                             {!isConnected && 
                                 <>

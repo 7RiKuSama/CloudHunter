@@ -1,27 +1,19 @@
 import { Flex } from "@chakra-ui/react"
-import Container from "./utilityComponants/Container"
-import ForcastCards from "./utilityComponants/ForcastCards"
-import Home from "./pages/home/Home"
-
-interface DarkModeProps {
-    darkMode: {
-        bg: string;
-        color: string;
-        boxColor: string;
-        boxBg: string;
-        isEnabled: boolean
-    }
-}
+import Container from "../common/Container"
+import ForcastCards from "../features/ForcastCards"
+import WeatherOverviewPanel from "../features/WeatherOverviewPanel"
+import SearchInput from "../common/SearchInput"
+import { ThemeProps } from "../../types/theme"
 
 
-const Content = ({ darkMode }: DarkModeProps) => {
+const Content = ({ theme }: ThemeProps) => {
     
     
     return <>
         
         <Flex h="100%" w="90vw" paddingInline={15} paddingBlock={10} style={{
-            color: darkMode.color,
-            backgroundColor: darkMode.bg,
+            color: theme.color,
+            backgroundColor: theme.bg,
             justifyContent: "center",
             textAlign: "justify",
         }}>
@@ -31,8 +23,9 @@ const Content = ({ darkMode }: DarkModeProps) => {
                 flexDirection={"column"}
                 gap={2}
             >
+                <SearchInput />
                 <Container>
-                    <Home height="850px"></Home>
+                    <WeatherOverviewPanel height="850px"></WeatherOverviewPanel>
                 </Container>
                 <Container>
                     <ForcastCards/>

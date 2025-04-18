@@ -1,0 +1,15 @@
+export interface ThemeProps {
+    theme: {
+        bg: string;
+        color: string;
+        boxColor: string;
+        boxBg: string;
+        borderColor: string;
+        secondColor: string;
+        isEnabled: boolean
+    }
+}
+
+export interface ColorProps {
+    danger: string
+}

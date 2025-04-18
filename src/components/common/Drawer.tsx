@@ -12,16 +12,9 @@ import {
     VStack,
     Button
   } from "@chakra-ui/react"
-import Logo from "../Logo"
+import Logo from "./Logo"
 import { IoCloseSharp } from "react-icons/io5"
-
-interface DrawerProps {
-    drawerOpen: boolean;
-    handleMouseEnter: () => void;
-    handleMouseLeave: () => void;
-    setDrawerOpen: (open: boolean) => void;
-    logoColor: string;
-}
+import { DrawerProps } from "../../types/componants"
 
 const Drawer = ({ drawerOpen, setDrawerOpen, handleMouseEnter, handleMouseLeave, logoColor }: DrawerProps) => {
     
