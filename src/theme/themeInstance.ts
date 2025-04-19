@@ -25,6 +25,8 @@ export const darkTheme: ThemeProps['theme'] = {
 
 export const Colors: ColorProps = {
     danger: "rgba(255, 57, 57, 0.84)",
+    hoverText: "rgba(255, 255, 255, 0.84)",
+    hoverLight: "rgba(17, 79, 107, 0.88)"
 }
 
 

@@ -33,7 +33,6 @@ const Home = ({ height }: { height: string }) => {
                 gap={2}
                 className="weather-card"
                 >
-                <p>{searchText}</p>
                 <Grid
                     w={{base: "100%", lg: "25%"}}
                     templateColumns={{base: "repeat(2, 1fr)", md: "repeat(6, 1fr)", lg: "repeat(2, 1fr)"}}

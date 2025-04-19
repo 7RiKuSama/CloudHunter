@@ -59,6 +59,7 @@ const SearchInput = () => {
                     pl="40px" // Adjust based on icon size + desired spacing
                     placeholder="Search for a location..."
                     _placeholder={{color: theme.borderColor}}
+                    style={searchText? {borderBottomLeftRadius: "0px", borderBottomRightRadius: "0px"} : undefined}
                 />
             </>
         </InputGroup>

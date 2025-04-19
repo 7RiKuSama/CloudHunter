@@ -14,6 +14,7 @@ import setLogoColor from "./hooks/setLogoColor"
 import fetchWeather from "./services/GetCurrentWeater"
 import MainContext from "./Contexts/MainContext"
 import { lightTheme } from "./theme/themeInstance"
+import useAutocompleteLocation from "./services/UseAutocompleLocation"
 
 
 
@@ -23,10 +24,10 @@ function App() {
   const {logoColor, handleMouseEnter, handleMouseLeave, useLogoColor} = setLogoColor("#4d98fa")
   const [theme, setTheme] = useState(lightTheme)
   const {weather, isLoading} = fetchWeather()
-  const [searchText, setSearchText] = useState("")
+  const {searchText, setSearchText, suggestions} = useAutocompleteLocation()
 
   return (
-    <MainContext.Provider value={{weather, isLoading, location, theme, searchText, setSearchText}}>
+    <MainContext.Provider value={{weather, isLoading, location, theme, searchText, setSearchText, suggestions}}>
       <div style={{ background: theme.bg }}>
         <Provider>
           <Drawer handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} logoColor={logoColor} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
