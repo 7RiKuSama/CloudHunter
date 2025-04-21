@@ -4,11 +4,11 @@ import useLocation from "./GetLocation";
 const fetchWeather = () => {
     const { location } = useLocation()
     const [weather, useWeather] = useState({})
-    const [isLoading, setLoading] = useState(false) 
+    const [isLoading, setLoading] = useState(false)
 
     useEffect(() => {
         if (location.latitude !== null && location.longitude !== null) {
-            const url = `http://api.weatherapi.com/v1/current.json?key=6e1d4b43b9ff49a48f8233905251003&q=${location.latitude},${location.longitude}`;
+            let url = `http://api.weatherapi.com/v1/forecast.json?key=6e1d4b43b9ff49a48f8233905251003&q=${location.latitude},${location.longitude}&days=14`;
             fetch(url)
             .then((response) => {
                 if (!response.ok) {
@@ -17,14 +17,15 @@ const fetchWeather = () => {
                 return response.json();
             })
             .then((data) => {
-                useWeather(data);
+                console.log(data)
+                useWeather(data)
                 setLoading(true)
             })
             .catch((error) => {
                 console.error(error);
             });
         }
-        }, [location]);
+    }, [location]);
 
         return {weather, isLoading}
 }

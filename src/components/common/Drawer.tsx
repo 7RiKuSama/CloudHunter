@@ -12,26 +12,37 @@ import {
     VStack,
     Button
   } from "@chakra-ui/react"
-import Logo from "./Logo"
 import { IoCloseSharp } from "react-icons/io5"
 import { DrawerProps } from "../../types/componants"
 
-const Drawer = ({ drawerOpen, setDrawerOpen, handleMouseEnter, handleMouseLeave, logoColor }: DrawerProps) => {
+const Drawer = ({ drawerOpen, setDrawerOpen}: DrawerProps) => {
     
     
     
     return (
         <DrawerRoot key="full" size="full" open={drawerOpen} onOpenChange={(e) => setDrawerOpen(e.open)}>
           <DrawerBackdrop />
-          <DrawerContent className="nav-drawer">
+          <DrawerContent style={{
+            display: "flex",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            height: "100vh",
+            width: "50%",
+            zIndex: 1002,
+            backgroundColor: "var(--menus-color)",
+            color: "white",
+            padding: "10px",
+            fontSize: "1.5rem"
+          }}>
               <DrawerHeader>
               <DrawerTitle style={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center"
               }}>
-                <Link onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                    <Logo color={logoColor} lHeight="90pt" lWidth="90pt"/>
+                <Link>
+                    
                 </Link>
                 <IconButton 
                   variant="plain" 

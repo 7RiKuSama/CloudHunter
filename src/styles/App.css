@@ -28,14 +28,13 @@ body {
 .nav-link {
     color: white;
     font-weight: 400;
-    padding: 5px;
+    padding: 4px;
     margin-right: 10px;
 }
 
 .nav-link:hover {
     color: var(--links-color);
     background-color: var(--links-hover);
-    border-bottom: 1px solid var(--links-color);
     text-decoration: none;
     cursor: pointer;
     
@@ -45,8 +44,10 @@ body {
     color: var(--links-color);
     border: 1px solid var(--links-color);
     border-radius: 5px;
-    padding: 5px;
+    padding: 7px;
     text-decoration: none;
+    width: 60px;
+    text-align: center;
 }
 
 .button:hover {
@@ -55,10 +56,6 @@ body {
 
 .logo {
     color: rgb(255, 255, 255);
-}
-
-#navbar-btn {
-    display: none;
 }
 
 #fabar {
@@ -80,10 +77,6 @@ body {
         display: block;
     }
     
-    #navbar-btn {
-        display: block;
-    }
-
     .nav-link {
         font-weight: 400;
         padding: 5px;
@@ -98,7 +91,7 @@ body {
         border-bottom: none;
     }
 
-    .nav-drawer {
+    /*.nav-drawer {
         display: flex;
         position: fixed;
         top: 0;
@@ -110,7 +103,7 @@ body {
         color: white;
         padding: 10px;
         font-size: 1.5rem;
-    }
+    }*/
 
     .weather-card {
         flex-direction: column;

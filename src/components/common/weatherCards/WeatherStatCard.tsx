@@ -1,74 +1,112 @@
-import { Stat, Icon, HStack, Box, Text } from "@chakra-ui/react";
+import { Stat, Icon, HStack, Box, Text, Flex } from "@chakra-ui/react";
 import React from "react";
-import  MainContext from "../../../Contexts/MainContext"
-import { useContext } from "react"; 
+import MainContext from "../../../Contexts/MainContext";
+import { useContext } from "react";
 
 interface WeatherStatCardProps {
-    label: string|null
-    value: string|number|{icon: string, temperature: string}|null
-    unit:  string|null
-    forcast: boolean
-    children: React.ReactNode|null
+  label: string | null;
+  value: string | number | {
+    icon: string;
+    temperature: string;
+    nightTemp: string;
+    condition: string;
+  } | null;
+  unit: string | null;
+  forecast: boolean;
+  children: React.ReactNode | null;
 }
 
+const WeatherStatCard: React.FC<WeatherStatCardProps> = ({
+  label,
+  value,
+  unit,
+  forecast,
+  children
+}) => {
+  const { theme } = useContext(MainContext);
 
-const WeatherStatCard: React.FC<WeatherStatCardProps> = ({ label, value, unit, forcast, children }: WeatherStatCardProps) => {
-    const {theme} = useContext(MainContext)
+  const renderForecastContent = () => {
+    if (!value || typeof value !== 'object') return null;
+    
     return (
-    <>
-        <Stat.Root h={"100%"} borderWidth="1px" borderColor="gray" borderRadius="5px" p={2} width={"100%"} display="flex" gap={forcast ? 5 : undefined} border={`1px solid ${theme.borderColor}`}>
-            {!forcast && 
-                <HStack style={{display: "flex", justifyContent: "space-between", alignItems: "space-betweeen"}}>
-                    <Stat.Label color={theme.secondColor}>{label}</Stat.Label>
-                    <Icon color="fg.muted" style={{fontSize:"15px"}}>
-                        {children}
-                    </Icon>
-                </HStack>
-            }
-            {forcast && 
-                <HStack style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-                    <Stat.Label>{label}</Stat.Label>
-                    {value && typeof value === 'object' && value.icon && (
-                        <img src={value.icon} style={{height: "30px"}} />
-                    )}
-                </HStack>
-            }
-            <Stat.ValueText 
-                fontSize={{base: "14px", sm: "25px"}}
-                style={forcast? {
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "ceneter",
-                    alignSelf: "center",
-                }: {
-
-                }}
-            >
-                {typeof value !== 'object' && (typeof value === 'string' || typeof value === 'number') ? (
-                    <>
-                        {value} <Stat.ValueUnit>{unit}</Stat.ValueUnit>
-                    </>
-                ) : null}
-                
+      <Flex width="100%" height="100%" justifyContent="center">
+        <Box display="flex" flexDirection="column" justifyContent="center">
+            <Flex alignItems="center">
                 {
-                    forcast && typeof value === 'object' && value !== null ? 
-                        <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
-                            <Box display={"flex"} flexDirection={"row"}>
-                                <Text fontSize={{lg: "50px"}}>{value.temperature}</Text>
-                                <Stat.ValueUnit>{unit}</Stat.ValueUnit>
-                            </Box>
-                        </Box>
-                    : null
+                    value && typeof value === 'object' && value.icon && (
+                    <img src={value.icon} style={{ height: "90px" }} alt="Weather icon" />)
                 }
-            </Stat.ValueText>
-        </Stat.Root>
-    </>
-    )
-}
+                
+                <Box>
+                <Text fontSize="15px">{value.condition}</Text>
+                <Flex>
+                    <Text fontSize={{ lg: "50px" }}>{value.temperature}</Text>
+                    <Text mx={2}>/</Text>
+                    <Text color={theme.secondColor}>{value.nightTemp}</Text>
+                    <Stat.ValueUnit>{unit}</Stat.ValueUnit>
+                </Flex>
+                </Box>
+            </Flex>
+          
+        </Box>
+        <Box ml={10} display={{base: "none", lg: "block"}}>
+          <Text>Pressure: 00</Text>
+          <Text>Humidity: 00</Text>
+          <Text>Precipitation: 00</Text>
+          <Text>UV Index: 00</Text>
+        </Box>
+      </Flex>
+    );
+  };
 
-export default WeatherStatCard
+  const renderSimpleContent = () => {
+    if (typeof value !== 'string' && typeof value !== 'number') return null;
+    return (
+      <>
+        {value} <Stat.ValueUnit>{unit}</Stat.ValueUnit>
+      </>
+    );
+  };
 
+  return (
+    <Stat.Root
+      height="100%"
+      borderWidth="1px"
+      borderRadius="5px"
+      padding={2}
+      width="100%"
+      display="flex"
+      gap={forecast ? 5 : undefined}
+      border={`1px solid ${theme.borderColor}`}
+    >
+      {/* Header Section */}
+      <HStack
+        display="flex"
+        justifyContent={forecast ? "center" : "space-between"}
+        alignItems="center"
+        width="100%"
+      >
+        <Stat.Label color={theme.secondColor}>{label}</Stat.Label>
+        {!forecast && (
+          <Icon color="fg.muted" fontSize="15px">
+            {children}
+          </Icon>
+        )}
+      </HStack>
 
+      {/* Content Section */}
+      <Stat.ValueText
+        fontSize={{ base: "14px", sm: "25px" }}
+        display="flex"
+        justifyContent={forecast ? "center" : "flex-start"}
+        alignItems="center"
+        alignSelf="center"
+        width="100%"
+      >
+        {forecast ? renderForecastContent() : renderSimpleContent()}
+      </Stat.ValueText>
+    </Stat.Root>
+  );
+};
 
-
-
+export default WeatherStatCard;

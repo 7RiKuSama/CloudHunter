@@ -2,7 +2,7 @@ import { useContext } from "react";
 import MainContext from "../../Contexts/MainContext";
 import { Flex, Link } from "@chakra-ui/react";
 import { LuSearch } from "react-icons/lu";
-import { Colors } from "../../theme/themeInstance";
+import { Colors, darkTheme } from "../../theme/themeInstance";
 import { Suggestion } from "../../types/weather";
 
 const TypeHead = () => {
@@ -11,12 +11,14 @@ const TypeHead = () => {
         <Flex 
             w={"100%"}
             flexDirection={"row"}
-            bg= {theme.boxBg}
-            border= {`1px solid ${theme.borderColor}`}
-            borderRadius= "5px"
+            bg= {darkTheme.bg}
+            border= {`1px solid ${darkTheme.borderColor}`}
+            borderRadius= "10px"
             borderTop={"0px"}
             borderTopRadius={"0px"}
-
+            position={"absolute"}
+            top={"40px"}
+            left={"0"}
         >
             <ul
                 style={{
@@ -32,7 +34,7 @@ const TypeHead = () => {
                             alignItems: "center"
                         }}>
                                 <Link 
-                                    color={theme.secondColor}
+                                    color={darkTheme.secondColor}
                                     style={{
                                         width: "100%",
                                         padding: "10px",

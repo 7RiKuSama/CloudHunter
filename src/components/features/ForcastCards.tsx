@@ -1,42 +1,63 @@
-import { Flex, Text, HStack, DataList, Image } from "@chakra-ui/react"
+import { Flex, HStack, DataList, Image } from "@chakra-ui/react"
 import WeatherStatCard from "../common/weatherCards/WeatherStatCard";
-import { FaWeightHanging } from "react-icons/fa6";
+import MainContext from "../../Contexts/MainContext";
+import { useContext } from "react";
+
 
 const ForcastCard = () => {
-    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    
+    const { weather, isLoading, unit } = useContext(MainContext);
+
+    const forecastDays = weather?.forecast?.forecastday;
+
     return (
         <>
-            <Text fontWeight={"bold"} textStyle={"xl"} ml={2} mt={2}>Forcast Weather</Text>
             <Flex
-            h={{md: "fit-content", lg: "140px"}}
-            p={2}
-            gap={2}
+                h={{ md: "170px", lg: "230px" }}
+                p={2}
+                gap={2}
             >
-                <HStack display={{base: "none", md: "flex"}} w={"100%"}>
-                    {days.map((day) => {
-                        return (
-                            <WeatherStatCard value={{icon: "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png", temperature: "45"}} label={day} unit={"°C"} forcast={true}>
-                                <FaWeightHanging></FaWeightHanging>
-                            </WeatherStatCard>
-                        )
-                    })}
+                {/* Desktop */}
+                <HStack display={{ base: "none", md: "flex" }} w={"100%"}>
+                    {isLoading && forecastDays?.map((day: any) => (
+                        <WeatherStatCard
+                            key={day.date}
+                            value={{
+                                icon: day.day.condition.icon,
+                                temperature: unit === "C"
+                                    ? day.day.avgtemp_c.toString().split(".")[0]
+                                    : day.day.avgtemp_f.toString().split(".")[0],
+                                nightTemp: day.day.mintemp_c.toString().split(".")[0],
+                                condition: day.day.condition.text
+                            }}
+                            label={`${day.date.substring(5).slice(3, 5)}/${day.date.substring(5).slice(0, 2)}`}
+                            unit={`°${unit}`}
+                            forecast={true}
+                        >
+                            <></>
+                        </WeatherStatCard>
+                    ))}
                 </HStack>
-                <HStack display={{base: "block", md: "none"}} w={"100%"} p={2}>
-                    <DataList.Root orientation="horizontal" divideY="1px" size={"md"}>
-                        {days.map((day) => (
-                        <DataList.Item key={day} pt="4" display={"flex"}>
-                            <DataList.ItemLabel>{day}</DataList.ItemLabel>
-                            <DataList.ItemValue>45</DataList.ItemValue>
 
-                            <DataList.ItemValue><Image src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" h={"30px"}/></DataList.ItemValue>
-                        </DataList.Item>
+                {/* Mobile */}
+                <HStack display={{ base: "flex", md: "none" }} w={"100%"} p={2}>
+                    <DataList.Root orientation="horizontal" divideY="1px" size={"md"} display={"flex"} justifyContent={"space-between"} w={"100%"}>
+                        {isLoading && forecastDays?.map((day: any) => (
+                            <DataList.Item key={day.date}>
+                                <DataList.ItemLabel>{day.date}</DataList.ItemLabel>
+                                <DataList.ItemValue>{day.day.avgtemp_c}</DataList.ItemValue>
+                                <DataList.ItemValue>
+                                    <Image
+                                        src={day.day.condition.icon}
+                                        h={"30px"}
+                                    />
+                                </DataList.ItemValue>
+                            </DataList.Item>
                         ))}
                     </DataList.Root>
                 </HStack>
             </Flex>
         </>
-    )
-}
+    );
+};
 
-export default ForcastCard
+export default ForcastCard;

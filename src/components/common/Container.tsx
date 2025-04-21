@@ -10,11 +10,12 @@ const Container: React.FC<ContainerProps> = ({children}) => {
     
     return (
         <>
-            <Box w="100%" style={{
+            <Box w="100%" h={"100%"} style={{
                 backgroundColor: theme.boxBg,
                 border: `1px solid ${theme.borderColor}`,
-                borderRadius: "5px"
-            }}>
+                borderRadius: "5px",
+            }}
+            >
                 {children}
             </Box>
         </>

@@ -17,7 +17,7 @@ export const darkTheme: ThemeProps['theme'] = {
     bg: "rgb(29, 30, 38)",
     color: "white",
     boxColor: "white",
-    boxBg: "rgba(0, 0, 0, 0.2)",
+    boxBg: "rgb(0, 4, 8)",
     borderColor: "rgba(98, 164, 226, 0.27)",
     secondColor: "rgba(120, 175, 247, 0.8)",
     isEnabled: true
@@ -26,7 +26,9 @@ export const darkTheme: ThemeProps['theme'] = {
 export const Colors: ColorProps = {
     danger: "rgba(255, 57, 57, 0.84)",
     hoverText: "rgba(255, 255, 255, 0.84)",
-    hoverLight: "rgba(17, 79, 107, 0.88)"
+    hoverLight: "rgba(17, 79, 107, 0.88)",
+    hoverDark: "rgba(0, 174, 255, 0.88)",
+    menuColor: "rgb(255, 255, 255)"
 }
 
 

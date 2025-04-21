@@ -4,10 +4,7 @@ export interface ContainerProps {
 
 export interface DrawerProps {
     drawerOpen: boolean;
-    handleMouseEnter: () => void;
-    handleMouseLeave: () => void;
     setDrawerOpen: (open: boolean) => void;
-    logoColor: string;
 }
 
 export interface LogoProps {

@@ -1,16 +1,13 @@
-import { Flex } from "@chakra-ui/react"
+import { Flex, Box, Heading, Link } from "@chakra-ui/react"
 import Container from "../common/Container"
 import ForcastCards from "../features/ForcastCards"
 import WeatherOverviewPanel from "../features/WeatherOverviewPanel"
-import SearchInput from "../common/SearchInput"
 import { ThemeProps } from "../../types/theme"
-import { useContext } from "react"
-import MainContext from "../../Contexts/MainContext"
-import TypeHead from "../common/TypeHead"
+import HourlyWeather from "../features/HourlyWeather"
+import NewsSection from "../features/NewsSection"
 
 const Content = ({ theme }: ThemeProps) => {
     
-    const {searchText, suggestions} = useContext(MainContext)
     return <>
         
         <Flex h="100%" w="90vw" paddingInline={15} paddingBlock={10} style={{
@@ -25,18 +22,28 @@ const Content = ({ theme }: ThemeProps) => {
                 flexDirection={"column"}
                 gap={2}
             >
-                <div>
-                    <SearchInput />
-                    {
-                        searchText && <TypeHead />
-                    }
-                </div>
                 <Container>
                     <WeatherOverviewPanel height="850px"></WeatherOverviewPanel>
                 </Container>
+                <Heading>Weekly Weather</Heading>
                 <Container>
                     <ForcastCards/>
                 </Container>
+                <Heading>Hourly Weather Graph</Heading>
+                <Container>
+                    <HourlyWeather/>
+                </Container>
+                <Box>
+                    <Link><Heading>News Related to Weather Around the World</Heading></Link>
+                    <Flex h={"100%"} w={"100%"} gap={2} flexDirection={{base:"column", lg:"row"}}>
+                        <Box w={{base:"100%", lg:"65%"}} h={{lg: "900px"}} >
+                            <NewsSection />
+                        </Box>
+                        <Box w={{base:"100%", lg:"35%"}} h={{lg: "900px"}}>
+                            <NewsSection />
+                        </Box>
+                    </Flex>
+                </Box>
             </Flex>
         </Flex>
     </>

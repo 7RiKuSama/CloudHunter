@@ -20,7 +20,7 @@ import { FaWeightHanging } from "react-icons/fa6";
 
 const Home = ({ height }: { height: string }) => {
 
-    const { weather, isLoading, theme, searchText } = useContext(MainContext)
+    const { weather, isLoading, theme } = useContext(MainContext)
     const {flag, isFlagLoading} = getCountryFlag(isLoading? weather.location.country : "")
     
     return (

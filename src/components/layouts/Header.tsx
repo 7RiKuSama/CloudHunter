@@ -5,20 +5,25 @@ import {
     Flex,
     HStack, 
     Link, 
-    Avatar, 
+    Avatar,
+    Image,
+    VStack
 } from '@chakra-ui/react'
 import { FaBars } from 'react-icons/fa';
 import { MdDarkMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
-import { useState } from "react";
-import Logo from "../common/Logo";
+import { useState, useContext } from "react";
 import "../../styles/App.css"
 import { HeaderProps } from "../../types/header"
 import { lightTheme, darkTheme } from '../../theme/themeInstance';
+import SearchInput from '../common/SearchInput';
+import TypeHead from '../common/TypeHead';
+import MainContext from '../../Contexts/MainContext';
 
 const Header = (props: HeaderProps) => {
 
-    const [isConnected] = useState(true)
+    const {searchText} = useContext(MainContext)
+    const [isConnected] = useState(false)
     return <>
         <Provider>
             <header>
@@ -36,23 +41,44 @@ const Header = (props: HeaderProps) => {
                         justify="space-between"
                         h={"100%"}
                     >
-                        <IconButton id="navbar-btn" bg={"none"} ml={2} onClick={() => props.setDrawerOpen(!props.drawerOpen)}>
-                            <FaBars color="white" />
-                        </IconButton>
                         <HStack>
-                            <Link onMouseEnter={props.handleMouseEnter} onMouseLeave={props.handleMouseLeave} ml={6}>
-                                <Logo color={props.logoColor} lHeight="90pt" lWidth="90pt"/>
+                            <IconButton id="navbar-btn" bg={"none"} ml={2} onClick={() => props.setDrawerOpen(!props.drawerOpen)} display={{sm: "block", md: "none"}}>
+                                <FaBars color="white" />
+                            </IconButton>
+                            <Link ml={3}>
+                                <Image 
+                                    src="../../../public/aerify_logo.png" 
+                                    w={"40px"}
+                                    display={{
+                                        base: "none",
+                                        sm: "block"
+                                    }}
+                                />
+                                <Image 
+                                    src="../../../public/aerify_logo_text.png" 
+                                    w={"50px"}
+                                    display={{
+                                        base: "none",
+                                        md: "block"
+                                    }}
+                                />
                             </Link>
-                            <nav>
-                                <div className="nav-container">
-                                    <Link variant="plain" className="nav-link transitioned">Dashboard</Link>
-                                    <Link variant="plain" className="nav-link transitioned">Features</Link>
-                                    <Link variant="plain" className="nav-link transitioned">About</Link>
-                                    <Link variant="plain" className="nav-link transitioned">Contact</Link>
-                                </div>
-                            </nav>
+                                <Box w={"300px"} display={{base: "none", md: "block"}} fontSize={{base: "10px", sm: "12px"}} ml={{md: "20px"}}>
+                                    <nav>
+                                        <div className="nav-container">
+                                            <Link variant="plain" className="nav-link transitioned">Dashboard</Link>
+                                            <Link variant="plain" className="nav-link transitioned">Features</Link>
+                                            <Link variant="plain" className="nav-link transitioned">About</Link>
+                                            <Link variant="plain" className="nav-link transitioned">Contact</Link>
+                                        </div>
+                                    </nav>
+                            </Box>
                         </HStack>
-                        <HStack mr={4}>
+                        <VStack w={{base: "100%", sm:"45%", lg:"60%"}} position={"relative"}>
+                            <SearchInput width="100%"></SearchInput>
+                            {searchText && <TypeHead />}
+                        </VStack>
+                        <HStack mr={{base: 1, sm: 4}}>
                         <IconButton
                             variant="plain"
                             onClick={() =>
@@ -69,22 +95,27 @@ const Header = (props: HeaderProps) => {
                             >
                             {props.theme.isEnabled ? <MdDarkMode color="#4d98fa"/> : <MdOutlineDarkMode color="#4d98fa"/>}
                             </IconButton>
-                            {!isConnected && 
-                                <>
-                                    <Link className="button transitioned">Sign in</Link>
-                                </>
-                            }
-
-                            {
-                                isConnected && (
+                            <Box
+                                display={{ base: "none", sm: "block" }}
+                            >
+                                {!isConnected && 
                                     <>
-                                        <Avatar.Root>
-                                            <Avatar.Fallback name="ghalem chaouch" />
-                                            <Avatar.Image src="https://bit.ly/sage-adebayo" />
-                                        </Avatar.Root>
+                                        <Link className="button transitioned" textAlign={"center"}>Sign In</Link>
                                     </>
-                                )
-                            }
+                                }
+
+                                {
+                                    isConnected && (
+                                        <>
+                                            <Avatar.Root>
+                                                <Avatar.Fallback name="ghalem chaouch" />
+                                                <Avatar.Image src="https://bit.ly/sage-adebayo" />
+                                            </Avatar.Root>
+                                        </>
+                                    )
+                                }
+                            </Box>
+                            
                         </HStack>
                     </Flex>
                 </Box>

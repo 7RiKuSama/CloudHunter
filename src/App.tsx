@@ -5,32 +5,46 @@ import {
   Flex 
 } from "@chakra-ui/react"
 
+
+
 import { useState } from "react"
 import Header from "./components/layouts/Header"
 import MainContent from './components/layouts/MainContent'
 import "./styles/App.css"
 import Drawer from "./components/common/Drawer"
-import setLogoColor from "./hooks/setLogoColor"
 import fetchWeather from "./services/GetCurrentWeater"
 import MainContext from "./Contexts/MainContext"
 import { lightTheme } from "./theme/themeInstance"
 import useAutocompleteLocation from "./services/UseAutocompleLocation"
+import useWeatherData from "./services/useWeatherData"
+
+
+
 
 
 
 function App() {
  
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const {logoColor, handleMouseEnter, handleMouseLeave, useLogoColor} = setLogoColor("#4d98fa")
   const [theme, setTheme] = useState(lightTheme)
+  const [unit, setUnit] = useState("C")
   const {weather, isLoading} = fetchWeather()
   const {searchText, setSearchText, suggestions} = useAutocompleteLocation()
-
+  const plotData = useWeatherData(weather)
+  
+  
+  
+  
+  
+  
+  
+  
+  
   return (
-    <MainContext.Provider value={{weather, isLoading, location, theme, searchText, setSearchText, suggestions}}>
+    <MainContext.Provider value={{weather, isLoading, location, theme, searchText, setSearchText, suggestions, unit, setUnit, plotData}}>
       <div style={{ background: theme.bg }}>
         <Provider>
-          <Drawer handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} logoColor={logoColor} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
+          <Drawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>
           <Grid
             h="100%"
             templateRows="40px 1fr"
@@ -41,10 +55,6 @@ function App() {
               <Header 
                 drawerOpen={drawerOpen} 
                 setDrawerOpen={setDrawerOpen} 
-                logoColor={logoColor} 
-                useLogoColor={useLogoColor} 
-                handleMouseEnter={handleMouseEnter} 
-                handleMouseLeave={handleMouseLeave}
                 theme={theme}
                 setTheme={setTheme}      
               />
